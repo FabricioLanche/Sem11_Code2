@@ -74,6 +74,14 @@ public:
     ~IfExp();
 };
 
+class CountExp : public Exp {
+public: 
+    vector<Exp*> args;
+    CountExp(vector<Exp*> args);
+    Type accept(Visitor* visitor) override;
+    ~CountExp();
+};
+
 class MinExp : public Exp {
 public: 
     vector<Exp*> expresiones;

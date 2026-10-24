@@ -52,6 +52,9 @@ IfExp::~IfExp() {
     delete elseExp;
 }
 
+CountExp::CountExp(vector<Exp*> a) : args(a) {}
+CountExp::~CountExp() {}
+
 MinExp::MinExp() {}
 MinExp::~MinExp() {}
 

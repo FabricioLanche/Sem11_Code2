@@ -318,6 +318,18 @@ Exp* Parser::parseFactor() {
         if (!match(Token::RPAREN)) throw runtime_error("Error sintáctico: se esperaba ')'");
         return new IfExp(c, t, f);
     }
+    else if (match(Token::COUNT)){
+        match(Token::LPAREN);
+        vector<Exp*> args;
+        args.push_back(parseCExp());
+        match(Token::COMMA);
+        args.push_back(parseCExp());
+        while(match(Token::COMMA)) {
+            args.push_back(parseCExp());
+        }
+        match(Token::RPAREN);
+        return new CountExp(args);
+    }
     else if (match(Token::MIN)) {
         match(Token::LPAREN);
         MinExp* min = new MinExp();
