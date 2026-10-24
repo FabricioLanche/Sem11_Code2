@@ -35,6 +35,8 @@ ostream& operator<<(ostream& outs, const Token& tok) {
         case Token::PRINT:    outs << "TOKEN(PRINT, \""    << tok.text << "\")"; break;
         case Token::IF:       outs << "TOKEN(IF, \""       << tok.text << "\")"; break;
         case Token::MIN:       outs << "TOKEN(MIN, \""       << tok.text << "\")"; break;
+        case Token::COUNT:    outs << "TOKEN(COUNT, \""    << tok.text << "\")"; break;
+        case Token::MAX:      outs << "TOKEN(MAX, \""      << tok.text << "\")"; break;
         case Token::WHILE:    outs << "TOKEN(WHILE, \""    << tok.text << "\")"; break;
         case Token::DO:       outs << "TOKEN(DO, \""       << tok.text << "\")"; break;
         case Token::THEN:     outs << "TOKEN(THEN, \""     << tok.text << "\")"; break;

@@ -25,6 +25,7 @@ Type IfExp::accept(Visitor* visitor)      { return visitor->visit(this); }
 Type CountExp::accept(Visitor* visitor)   { return visitor->visit(this); }
 Type FCallExp::accept(Visitor* visitor)   { return visitor->visit(this); }
 Type MinExp::accept(Visitor* visitor)     { return visitor->visit(this); }
+Type MaxExp::accept(Visitor* visitor)     { return visitor->visit(this); }
 void AssignStmt::accept(Visitor* visitor)  { visitor->visit(this); }
 void PrintStmt::accept(Visitor* visitor)   { visitor->visit(this); }
 void IfStmt::accept(Visitor* visitor)      { visitor->visit(this); }
@@ -190,6 +191,24 @@ Type GencodeVisitor::visit(MinExp* exp) {
         out << "jle keep_min_" << id << endl;
         out << "movq %rcx, %rax" << endl;
         out << "keep_min_" << id << ":" << endl;
+    }
+    return Type(0);
+}
+
+Type GencodeVisitor::visit(MaxExp* exp) {
+    exp->expresiones[0]->accept(this);
+    for (size_t i = 1; i < exp->expresiones.size(); i++) {
+        int id = etiquetas++;
+        out << "pushq %rax" << endl;
+        pila++;
+        exp->expresiones[i]->accept(this);
+        out << "movq %rax, %rcx" << endl;
+        out << "popq %rax" << endl;
+        pila--;
+        out << "cmpq %rcx, %rax" << endl;
+        out << "jge keep_max_" << id << endl;
+        out << "movq %rcx, %rax" << endl;
+        out << "keep_max_" << id << ":" << endl;
     }
     return Type(0);
 }
@@ -445,6 +464,19 @@ Type TypeChecker::visit(MinExp* exp) {
         Type t = exp->expresiones[i]->accept(this);
         if(!t.isInt()){
             error("El argumento " + to_string(i + 1) + " de min debe ser int, pero es " + t.kindName());
+        }
+    }
+    return Type(0);
+}
+
+Type TypeChecker::visit(MaxExp* exp) {
+    if (exp->expresiones.size() < 2) {
+        error("max requiere al menos 2 argumentos");
+    }
+    for (size_t i = 0; i < exp->expresiones.size(); i++) {
+        Type t = exp->expresiones[i]->accept(this);
+        if (!t.isInt()) {
+            error("el argumento " + to_string(i + 1) + " de max debe ser int, pero es " + t.kindName());
         }
     }
     return Type(0);

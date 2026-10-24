@@ -342,6 +342,18 @@ Exp* Parser::parseFactor() {
         match(Token::RPAREN);
         return min;
     }
+    else if (match(Token::MAX)) {
+        if (!match(Token::LPAREN)) throw runtime_error("Error sintáctico: se esperaba '(' tras max");
+        vector<Exp*> args;
+        args.push_back(parseCExp());
+        if (!match(Token::COMMA)) throw runtime_error("Error sintáctico: max necesita al menos 2 argumentos");
+        args.push_back(parseCExp());
+        while (match(Token::COMMA)) {
+            args.push_back(parseCExp());
+        }
+        if (!match(Token::RPAREN)) throw runtime_error("Error sintáctico: se esperaba ')' en max");
+        return new MaxExp(args);
+    }    
     else {
         throw runtime_error("Error sintáctico");
     }

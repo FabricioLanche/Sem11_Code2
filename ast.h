@@ -90,6 +90,14 @@ public:
     ~MinExp();
 };
 
+class MaxExp : public Exp {
+public:
+    vector<Exp*> expresiones;
+    MaxExp(vector<Exp*> expresiones);
+    Type accept(Visitor* visitor) override;
+    ~MaxExp();
+};
+
 // Llamada a función: nombre(arg1, arg2, ...)
 class FCallExp : public Exp {
 public:

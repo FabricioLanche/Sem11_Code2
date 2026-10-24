@@ -58,6 +58,13 @@ CountExp::~CountExp() {}
 MinExp::MinExp() {}
 MinExp::~MinExp() {}
 
+// Crea un max con sus argumentos
+MaxExp::MaxExp(vector<Exp*> e) : expresiones(e) {}
+// Libera los argumentos
+MaxExp::~MaxExp() {
+    for (Exp* e : expresiones) delete e;
+}
+
 // Destructor de Stmt
 Stmt::~Stmt() {}
 

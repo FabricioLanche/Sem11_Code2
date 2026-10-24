@@ -28,11 +28,12 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input1.s:
-No se generó
+3
+-4
+16
 
 ========================================
 input2.txt
@@ -62,11 +63,13 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input2.s:
-No se generó
+15
+10
+20
+10
 
 ========================================
 input3.txt
@@ -98,11 +101,13 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input3.s:
-No se generó
+2
+100
+42
+90
 
 ========================================
 input4.txt
@@ -136,11 +141,12 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input4.s:
-No se generó
+-4
+5
+9
 
 ========================================
 input5.txt
@@ -196,11 +202,11 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input6.s:
-No se generó
+37
+6
 
 ========================================
 input7.txt
@@ -235,11 +241,13 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input7.s:
-No se generó
+17
+33
+48
+3
 
 ========================================
 input8.txt
@@ -273,11 +281,13 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input8.s:
-No se generó
+6
+12
+4
+6
 
 ========================================
 input9.txt
@@ -305,11 +315,12 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input9.s:
-No se generó
+2
+25
+52
 
 ========================================
 input10.txt
@@ -341,8 +352,10 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO SE EJECUTÓ
-  Error al parsear: Error sintáctico
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input10.s:
-No se generó
+13
+21
+20
+3

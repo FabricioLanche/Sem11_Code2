@@ -26,6 +26,8 @@ public:
         ASSIGN,
         PRINT,
         MIN,
+        COUNT,
+        MAX,
         IF,
         WHILE,
         DO,
