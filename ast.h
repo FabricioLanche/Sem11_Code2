@@ -74,6 +74,30 @@ public:
     ~IfExp();
 };
 
+class CountExp : public Exp {
+public: 
+    vector<Exp*> expresiones;
+    CountExp();
+    Type accept(Visitor* visitor) override;
+    ~CountExp();
+};
+
+class MaxExp : public Exp {
+public: 
+    vector<Exp*> expresiones;
+    MaxExp();
+    Type accept(Visitor* visitor) override;
+    ~MaxExp();
+};
+
+class MinExp : public Exp {
+public: 
+    vector<Exp*> expresiones;
+    MinExp();
+    Type accept(Visitor* visitor) override;
+    ~MinExp();
+};
+
 // Llamada a función: nombre(arg1, arg2, ...)
 class FCallExp : public Exp {
 public:

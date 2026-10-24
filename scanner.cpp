@@ -41,6 +41,9 @@ Token* Scanner::nextToken() {
         if (lexema == "sqrt")          return new Token(Token::SQRT,     input, first, current - first);
         else if (lexema == "print")    return new Token(Token::PRINT,    input, first, current - first);
         else if (lexema == "if")       return new Token(Token::IF,       input, first, current - first);
+        else if (lexema == "count")       return new Token(Token::COUNT,       input, first, current - first);
+        else if (lexema == "max")       return new Token(Token::MAX,       input, first, current - first);
+        else if (lexema == "min")       return new Token(Token::MIN,       input, first, current - first);
         else if (lexema == "while")    return new Token(Token::WHILE,    input, first, current - first);
         else if (lexema == "then")     return new Token(Token::THEN,     input, first, current - first);
         else if (lexema == "do")       return new Token(Token::DO,       input, first, current - first);
