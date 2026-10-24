@@ -24,6 +24,7 @@ public:
     virtual Type visit(IdExp* exp) = 0;
     virtual Type visit(IfExp* exp) = 0;
     virtual Type visit(FCallExp* exp) = 0;
+    virtual Type visit(MinExp* exp) = 0;
     // Sentencias
     virtual void visit(AssignStmt* stm) = 0;
     virtual void visit(PrintStmt* stm) = 0;
@@ -65,6 +66,7 @@ public:
     Type visit(IdExp* exp) override;
     Type visit(IfExp* exp) override;
     Type visit(FCallExp* exp) override;
+    Type visit(MinExp* exp) override;
     void visit(AssignStmt* stm) override;
     void visit(PrintStmt* stm) override;
     void visit(IfStmt* stm) override;
@@ -98,6 +100,7 @@ public:
     Type visit(IdExp* exp) override;
     Type visit(IfExp* exp) override;
     Type visit(FCallExp* exp) override;
+    Type visit(MinExp* exp) override;
     void visit(AssignStmt* stm) override;
     void visit(PrintStmt* stm) override;
     void visit(IfStmt* stm) override;

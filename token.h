@@ -25,8 +25,6 @@ public:
         SEMICOL,
         ASSIGN,
         PRINT,
-        COUNT,
-        MAX,
         MIN,
         IF,
         WHILE,

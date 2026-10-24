@@ -74,22 +74,6 @@ public:
     ~IfExp();
 };
 
-class CountExp : public Exp {
-public: 
-    vector<Exp*> expresiones;
-    CountExp();
-    Type accept(Visitor* visitor) override;
-    ~CountExp();
-};
-
-class MaxExp : public Exp {
-public: 
-    vector<Exp*> expresiones;
-    MaxExp();
-    Type accept(Visitor* visitor) override;
-    ~MaxExp();
-};
-
 class MinExp : public Exp {
 public: 
     vector<Exp*> expresiones;

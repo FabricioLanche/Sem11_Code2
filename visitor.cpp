@@ -23,7 +23,7 @@ Type NumberExp::accept(Visitor* visitor)  { return visitor->visit(this); }
 Type IdExp::accept(Visitor* visitor)      { return visitor->visit(this); }
 Type IfExp::accept(Visitor* visitor)      { return visitor->visit(this); }
 Type FCallExp::accept(Visitor* visitor)   { return visitor->visit(this); }
-
+Type MinExp::accept(Visitor* visitor)     { return visitor->visit(this); }
 void AssignStmt::accept(Visitor* visitor)  { visitor->visit(this); }
 void PrintStmt::accept(Visitor* visitor)   { visitor->visit(this); }
 void IfStmt::accept(Visitor* visitor)      { visitor->visit(this); }
@@ -159,6 +159,24 @@ Type GencodeVisitor::visit(FCallExp* exp) {
     out << "call " << exp->nombre << endl;
     if (alinear) out << "addq $8, %rsp" << endl;
     return tipoDe(funciones[exp->nombre]->tipo);
+}
+
+Type GencodeVisitor::visit(MinExp* exp) {
+    exp->expresiones[0]->accept(this); //lo dejo en el rax
+    for (int i=1; i<exp->expresiones.size(); i++) {
+        int id = etiquetas++;
+        out << "pushq %rax" << endl; //lo coloca en la pila
+        pila++;
+        exp->expresiones[i]->accept(this); //lo deja en el rax
+        out << "movq %rax, %rcx" << endl;
+        out << "popq %rax" << endl; // rax = expresiones[i-1];
+        pila--;
+        out << "cmpq %rcx, %rax" << endl;
+        out << "jle keep_min_" << id << endl;
+        out << "movq %rcx, %rax" << endl;
+        out << "keep_min_" << id << ":" << endl;
+    }
+    return Type(0);
 }
 
 // Evalúa la expresión y la guarda en la posición de la variable
@@ -385,6 +403,20 @@ Type TypeChecker::visit(FCallExp* exp) {
         }
     }
     return tipoDe(f->tipo);
+}
+
+Type TypeChecker::visit(MinExp* exp) {
+    if(exp->expresiones.size()<2)
+        error("la función min debe tener al menos 2 argumentos");
+
+    //Se verifica que todos los args sean del mismo tipo int
+    for(int i=0; i<exp->expresiones.size();i++){
+        Type t = exp->expresiones[i]->accept(this);
+        if(!t.isInt()){
+            error("El argumento " + to_string(i + 1) + " de min debe ser int, pero es " + t.kindName());
+        }
+    }
+    return Type(0);
 }
 
 // ---------- Sentencias ----------

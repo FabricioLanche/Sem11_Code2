@@ -52,12 +52,6 @@ IfExp::~IfExp() {
     delete elseExp;
 }
 
-CountExp::CountExp() {}
-CountExp::~CountExp() {}
-
-MaxExp::MaxExp() {}
-MaxExp::~MaxExp() {}
-
 MinExp::MinExp() {}
 MinExp::~MinExp() {}
 
