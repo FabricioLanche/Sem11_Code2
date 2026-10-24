@@ -320,39 +320,15 @@ Exp* Parser::parseFactor() {
     }
     else if (match(Token::COUNT)){
         match(Token::LPAREN);
-        CountExp* count = new CountExp();
-        count->expresiones.push_back(parseCExp());
+        vector<Exp*> args;
+        args.push_back(parseCExp());
         match(Token::COMMA);
-        count->expresiones.push_back(parseCExp());
+        args.push_back(parseCExp());
         while(match(Token::COMMA)) {
-            count->expresiones.push_back(parseCExp());
+            args.push_back(parseCExp());
         }
         match(Token::RPAREN);
-        return count;
-    }
-    else if (match(Token::MAX)) {
-        match(Token::LPAREN);
-        MaxExp* max = new MaxExp();
-        max->expresiones.push_back(parseCExp());
-        match(Token::COMMA);
-        max->expresiones.push_back(parseCExp());
-        while(match(Token::COMMA)) {
-            max->expresiones.push_back(parseCExp());
-        }
-        match(Token::RPAREN);
-        return max;
-    }
-    else if (match(Token::MIN)) {
-        match(Token::LPAREN);
-        MinExp* min = new MinExp();
-        min->expresiones.push_back(parseCExp());
-        match(Token::COMMA);
-        min->expresiones.push_back(parseCExp());
-        while(match(Token::COMMA)) {
-            min->expresiones.push_back(parseCExp());
-        }
-        match(Token::RPAREN);
-        return min;
+        return new CountExp(args);
     }
     else {
         throw runtime_error("Error sintáctico");

@@ -22,6 +22,7 @@ Type BinaryExp::accept(Visitor* visitor)  { return visitor->visit(this); }
 Type NumberExp::accept(Visitor* visitor)  { return visitor->visit(this); }
 Type IdExp::accept(Visitor* visitor)      { return visitor->visit(this); }
 Type IfExp::accept(Visitor* visitor)      { return visitor->visit(this); }
+Type CountExp::accept(Visitor* visitor)   { return visitor->visit(this); }
 Type FCallExp::accept(Visitor* visitor)   { return visitor->visit(this); }
 
 void AssignStmt::accept(Visitor* visitor)  { visitor->visit(this); }
@@ -139,6 +140,20 @@ Type GencodeVisitor::visit(IfExp* exp) {
     out << "ifexp_end_" << id << ":" << endl;
     bool cond = c.isBool() ? c.boolValue : c.intValue != 0;
     return cond ? t : e;
+}
+
+Type GencodeVisitor::visit(CountExp* exp) {
+    exp->args[0]->accept(this);
+    for (size_t i = 1; i < exp->args.size(); i++) {
+        out << "pushq %rax" << endl;
+        pila++;
+        exp->args[i]->accept(this);
+        out << "movq %rax, %rcx" << endl;
+        out << "popq %rax" << endl;
+        pila--;
+        out << "addq %rcx, %rax" << endl;
+    }
+    return Type(0);
 }
 
 // Llamada: evalúa los argumentos, los pasa en registros y llama a la función.
@@ -365,6 +380,22 @@ Type TypeChecker::visit(IfExp* exp) {
               + t.kindName() + " y " + e.kindName());
     }
     return t;
+}
+
+Type TypeChecker::visit(CountExp* exp) {
+    if (exp->args.size() < 2) {
+        cerr << "Error: count requiere al menos dos operandos" << endl;
+        exit(0);
+    }
+
+    for (size_t i = 0; i < exp->args.size(); i++) {
+        Type ti = exp->args[i]->accept(this);
+        if (!ti.isBool()) {
+            cerr << "Error: count requiere expresiones booleanas" << endl;
+            exit(0);
+        }
+    }
+    return Type(0);
 }
 
 // f(a1, ..., an): la función existe, recibe n argumentos y cada uno tiene el tipo de su parámetro

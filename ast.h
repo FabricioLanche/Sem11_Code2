@@ -76,26 +76,10 @@ public:
 
 class CountExp : public Exp {
 public: 
-    vector<Exp*> expresiones;
-    CountExp();
+    vector<Exp*> args;
+    CountExp(vector<Exp*> args);
     Type accept(Visitor* visitor) override;
     ~CountExp();
-};
-
-class MaxExp : public Exp {
-public: 
-    vector<Exp*> expresiones;
-    MaxExp();
-    Type accept(Visitor* visitor) override;
-    ~MaxExp();
-};
-
-class MinExp : public Exp {
-public: 
-    vector<Exp*> expresiones;
-    MinExp();
-    Type accept(Visitor* visitor) override;
-    ~MinExp();
 };
 
 // Llamada a función: nombre(arg1, arg2, ...)
