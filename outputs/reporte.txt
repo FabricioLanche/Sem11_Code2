@@ -169,11 +169,11 @@ fun int main()
     return 0
 endfun
 
-TypeChecker: NO PASÓ
-  Error de tipos: el operador '+' necesita operandos int, pero recibió int + bool
+TypeChecker: PASÓ (Typecheck exitoso)
 
 Resultado de input5.s:
-No se generó: el programa no pasó el TypeChecker
+4
+9
 
 ========================================
 input6.txt
